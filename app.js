@@ -30,26 +30,25 @@ var actual = 0;
 
 function cl_funct(){
 
-    $(".opt-continue").click(function(){
-            if($("input[name=iSolution]").val() === data[actual].phrase_de){
-             
-                correct++;
-                return true;
-            } 
-            actual++;
-        })        
-    return true;
+    
 }
 
 $(document).ready(function(){
-    for(actual=0; actual< data.length; actual++){
+  if(actual<data.length){
     var elem = tmpl.replace("ID",actual).replace("SENTENCE",data[actual].phrase_en);
-         $(".sentences").html("");
         $(".sentences").html(elem);
         $("input[name=iSolution]").val("");
-        cl_funct();
-        $(".current").removeClass("current");
-    }
+      $(".opt-continue").click(function(){
+        
+          if($("input[name=iSolution]").val() === data[actual].phrase_de){
+                correct++;
+            } 
+            actual++;
+            $(".current").removeClass("current");
+            }) 
+        }        
+    
+    
     //fine ciclo
     $("#tot-good").text(correct);
     $("#tot").text(data.length);
